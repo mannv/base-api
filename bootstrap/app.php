@@ -3,7 +3,17 @@
 require_once __DIR__ . '/../vendor/autoload.php';
 
 try {
-    (new Dotenv\Dotenv(__DIR__ . '/../'))->load();
+    //load config
+    $env = 'dev';
+    $environmentPath = __DIR__ . '/../.env';
+    if (file_exists($environmentPath)) {
+        $setEnv = trim(file_get_contents($environmentPath));
+        $arr = explode('=', $setEnv);
+        $env = $arr[1];
+    }
+    $file = '.' . $env . '.env';
+    $path = __DIR__ . '/../config/env/';
+    (new Dotenv\Dotenv($path, $file))->load();
 } catch (Dotenv\Exception\InvalidPathException $e) {
     //
 }
