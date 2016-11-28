@@ -7,13 +7,12 @@
  * Time: 1:54 PM
  */
 namespace App\Transformer;
-
-use App\Models\User;
+use App\Models\UserModel;
 use League\Fractal\TransformerAbstract;
 
 class UserTransformer extends TransformerAbstract
 {
-    public function transform(User $user) {
+    public function transform(UserModel $user) {
         $attributes = $user->toArray();
         return $attributes;
     }

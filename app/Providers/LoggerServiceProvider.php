@@ -47,9 +47,9 @@ class LoggerServiceProvider
     private function initLogger()
     {
         $trace = debug_backtrace();
-        $this->_line = $trace[$this->_classIndex - 1]['line'];
-        $this->_method = $trace[$this->_classIndex]['function'];
-        $className = $trace[$this->_classIndex]['class'];
+        $this->_line = isset($trace[$this->_classIndex - 1]['line']) ? $trace[$this->_classIndex - 1]['line'] : '0';
+        $this->_method = isset($trace[$this->_classIndex]['function']) ? $trace[$this->_classIndex]['function'] : '';
+        $className = isset($trace[$this->_classIndex]['class']) ? $trace[$this->_classIndex]['class'] : '';
 
         $arr = explode('\\', $className);
         if (count($arr) > 1) {
@@ -61,7 +61,7 @@ class LoggerServiceProvider
 
         $loggerPath = storage_path('logs') . '/' . $this->_fileName . '.log';
         $this->_logger = new Logger($this->_controller);
-        $handler = new StreamHandler($loggerPath, Config::get('app.log_level'));
+        $handler = new StreamHandler($loggerPath, env('APP_LOG_LEVEL', 'debug'));
         $handler->setFormatter(new LineFormatter(null, null, true, true));
         $this->_logger->pushHandler($handler);
         $this->_logger->pushHandler(new FirePHPHandler());
