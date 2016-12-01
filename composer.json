@@ -14,7 +14,10 @@
         "predis/predis": "^1.1",
         "illuminate/redis": "^5.3",
         "mannv/dingo-routes-list": "1.0.x@dev",
-        "monolog/monolog": "^1.22"
+        "monolog/monolog": "^1.22",
+        "nesbot/carbon": "^1.21",
+    	"maatwebsite/excel": "^2.1",
+    	"jdavidbakr/replaceable-model": "^1.0"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.2",
